@@ -1,4 +1,3 @@
-
 use std::collections::BinaryHeap;
 
 pub fn solve(input: String) {
@@ -22,5 +21,18 @@ pub fn solve(input: String) {
     }
     let sum = top_three.iter().sum::<u32>();
     println!("{sum}")
+}
+
+#[cfg(test)]
+mod tests {
+    use std::fs::read_to_string;
+    use super::solve;
+
+    #[test]
+    fn day_one() {
+        let input = read_to_string("inputs/day_1_input.txt").unwrap();
+        solve(input);
+    }
+
 }
 
