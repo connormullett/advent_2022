@@ -1,7 +1,5 @@
 #![allow(dead_code)]
 
-mod part_two;
-
 #[derive(Debug, PartialEq)]
 enum Option {
     Rock,
@@ -18,17 +16,17 @@ impl Option {
         }
     }
 
-    pub fn compare(&self, other: Option) -> Outcome {
+    pub fn compare(&self, other: &Outcome) -> Option {
         match self {
-            Option::Rock if other == Option::Rock=> Outcome::Draw,
-            Option::Rock if other == Option::Scissors=> Outcome::Win,
-            Option::Rock if other == Option::Paper=> Outcome::Loss,
-            Option::Paper if other == Option::Rock => Outcome::Win,
-            Option::Paper if other == Option::Paper => Outcome::Draw,
-            Option::Paper if other == Option::Scissors => Outcome::Loss,
-            Option::Scissors if other == Option::Rock => Outcome::Loss,
-            Option::Scissors if other == Option::Paper => Outcome::Win,
-            Option::Scissors if other == Option::Scissors => Outcome::Draw,
+            Option::Rock if other == &Outcome::Win => Option::Paper,
+            Option::Rock if other == &Outcome::Loss => Option::Scissors,
+            Option::Rock if other == &Outcome::Draw => Option::Rock,
+            Option::Paper if other == &Outcome::Win => Option::Scissors,
+            Option::Paper if other == &Outcome::Loss => Option::Rock,
+            Option::Paper if other == &Outcome::Draw => Option::Paper,
+            Option::Scissors if other == &Outcome::Win => Option::Rock,
+            Option::Scissors if other == &Outcome::Loss => Option::Paper,
+            Option::Scissors if other == &Outcome::Draw => Option::Scissors,
             _ => panic!("Invalid")
         }
     }
@@ -45,10 +43,22 @@ impl From<&str> for Option {
     }
 }
 
+#[derive(Debug, PartialEq)]
 pub enum Outcome {
     Win,
     Loss,
     Draw
+}
+
+impl From<&str> for Outcome {
+    fn from(c: &str) -> Self {
+        match c {
+            "X" => Outcome::Loss,
+            "Y" => Outcome::Draw,
+            "Z" => Outcome::Win,
+            _ => panic!("Invalid input")
+        }
+    }
 }
 
 impl Outcome {
@@ -69,14 +79,14 @@ pub fn solve(input: String) {
     for line in lines {
         let mut line = line.split(' ');
         let opponent_move = line.next().unwrap();
-        let my_move = line.next().unwrap();
+
         let opp_option = Option::from(opponent_move);
-        let my_option = Option::from(my_move);
+        let best_outcome = Outcome::from(line.next().unwrap());
 
-        let outcome = my_option.compare(opp_option);
+        let option = opp_option.compare(&best_outcome);
 
-        score += outcome.score();
-        score += my_option.score();
+        let result = option.score() + best_outcome.score();
+        score += result;
     }
 
     println!("result :: {}", score);
@@ -88,7 +98,7 @@ mod tests {
     use super::solve;
 
     #[test]
-    fn day_two() {
+    fn part_two() {
         let input = read_to_string("inputs/day_2_input.txt").unwrap();
         solve(input);
     }
