@@ -4,7 +4,7 @@
 enum Option {
     Rock,
     Paper,
-    Scissors
+    Scissors,
 }
 
 impl Option {
@@ -27,7 +27,7 @@ impl Option {
             Option::Scissors if other == &Outcome::Win => Option::Rock,
             Option::Scissors if other == &Outcome::Loss => Option::Paper,
             Option::Scissors if other == &Outcome::Draw => Option::Scissors,
-            _ => panic!("Invalid")
+            _ => panic!("Invalid"),
         }
     }
 }
@@ -38,7 +38,7 @@ impl From<&str> for Option {
             "A" | "X" => Option::Rock,
             "B" | "Y" => Option::Paper,
             "C" | "Z" => Option::Scissors,
-            _ => panic!("Invalid input")
+            _ => panic!("Invalid input"),
         }
     }
 }
@@ -47,7 +47,7 @@ impl From<&str> for Option {
 pub enum Outcome {
     Win,
     Loss,
-    Draw
+    Draw,
 }
 
 impl From<&str> for Outcome {
@@ -56,7 +56,7 @@ impl From<&str> for Outcome {
             "X" => Outcome::Loss,
             "Y" => Outcome::Draw,
             "Z" => Outcome::Win,
-            _ => panic!("Invalid input")
+            _ => panic!("Invalid input"),
         }
     }
 }
@@ -66,7 +66,7 @@ impl Outcome {
         match self {
             Outcome::Win => 6,
             Outcome::Loss => 0,
-            Outcome::Draw => 3
+            Outcome::Draw => 3,
         }
     }
 }
@@ -94,8 +94,8 @@ pub fn solve(input: String) {
 
 #[cfg(test)]
 mod tests {
-    use std::fs::read_to_string;
     use super::solve;
+    use std::fs::read_to_string;
 
     #[test]
     fn part_two() {
@@ -103,4 +103,3 @@ mod tests {
         solve(input);
     }
 }
-

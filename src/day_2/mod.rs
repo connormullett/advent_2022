@@ -6,7 +6,7 @@ mod part_two;
 enum Option {
     Rock,
     Paper,
-    Scissors
+    Scissors,
 }
 
 impl Option {
@@ -20,16 +20,16 @@ impl Option {
 
     pub fn compare(&self, other: Option) -> Outcome {
         match self {
-            Option::Rock if other == Option::Rock=> Outcome::Draw,
-            Option::Rock if other == Option::Scissors=> Outcome::Win,
-            Option::Rock if other == Option::Paper=> Outcome::Loss,
+            Option::Rock if other == Option::Rock => Outcome::Draw,
+            Option::Rock if other == Option::Scissors => Outcome::Win,
+            Option::Rock if other == Option::Paper => Outcome::Loss,
             Option::Paper if other == Option::Rock => Outcome::Win,
             Option::Paper if other == Option::Paper => Outcome::Draw,
             Option::Paper if other == Option::Scissors => Outcome::Loss,
             Option::Scissors if other == Option::Rock => Outcome::Loss,
             Option::Scissors if other == Option::Paper => Outcome::Win,
             Option::Scissors if other == Option::Scissors => Outcome::Draw,
-            _ => panic!("Invalid")
+            _ => panic!("Invalid"),
         }
     }
 }
@@ -40,7 +40,7 @@ impl From<&str> for Option {
             "A" | "X" => Option::Rock,
             "B" | "Y" => Option::Paper,
             "C" | "Z" => Option::Scissors,
-            _ => panic!("Invalid input")
+            _ => panic!("Invalid input"),
         }
     }
 }
@@ -48,7 +48,7 @@ impl From<&str> for Option {
 pub enum Outcome {
     Win,
     Loss,
-    Draw
+    Draw,
 }
 
 impl Outcome {
@@ -56,7 +56,7 @@ impl Outcome {
         match self {
             Outcome::Win => 6,
             Outcome::Loss => 0,
-            Outcome::Draw => 3
+            Outcome::Draw => 3,
         }
     }
 }
@@ -84,8 +84,8 @@ pub fn solve(input: String) {
 
 #[cfg(test)]
 mod tests {
-    use std::fs::read_to_string;
     use super::solve;
+    use std::fs::read_to_string;
 
     #[test]
     fn day_two() {
@@ -93,4 +93,3 @@ mod tests {
         solve(input);
     }
 }
-

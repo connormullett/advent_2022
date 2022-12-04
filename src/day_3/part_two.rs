@@ -30,8 +30,8 @@ pub fn get_priority(c: char) -> usize {
 
 #[cfg(test)]
 mod tests {
-    use std::fs::read_to_string;
     use super::solve;
+    use std::fs::read_to_string;
 
     #[test]
     fn day_three_part_two() {

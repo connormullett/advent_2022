@@ -15,7 +15,8 @@ pub fn solve(input: String) {
                 }
             }
             panic!("no dupes");
-        }).sum::<usize>();
+        })
+        .sum::<usize>();
     println!("{sum}");
 }
 
@@ -31,8 +32,8 @@ pub fn get_priority(c: char) -> usize {
 
 #[cfg(test)]
 mod tests {
-    use std::fs::read_to_string;
     use super::solve;
+    use std::fs::read_to_string;
 
     #[test]
     fn day_three() {
@@ -40,4 +41,3 @@ mod tests {
         solve(input);
     }
 }
-
